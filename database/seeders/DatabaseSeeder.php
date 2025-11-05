@@ -13,11 +13,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Create admin user
+        User::factory()->create([
+            'name' => 'Admin User',
+            'username' => 'admin',
+            'role' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('pass112233'),
+        ]);
 
+        // Create regular test user
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'username' => 'testuser',
+            'role' => 'user',
+            'email' => 'test@test.com',
+            'password' => bcrypt('pass112233'),
         ]);
+
+        // Optionally create 10 random users
+        // User::factory(10)->withoutTwoFactor()->create();
     }
 }
